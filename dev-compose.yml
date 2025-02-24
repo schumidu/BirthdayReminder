@@ -1,0 +1,33 @@
+services:
+  db: 
+    image: mysql:8.3
+    restart: no
+    container_name: mysqldbbdreminder
+    ports:
+      - 3306:3306
+    environment:
+      TZ: Europe/Berlin
+      MYSQL_USER: birthdayreminderuser
+      MYSQL_PASSWORD: examplepass
+      MYSQL_DATABASE: birthdayreminder
+      MYSQL_ROOT_PASSWORD: test12
+
+  payara:
+    container_name: birthdayReminder-dev
+    build:
+      dockerfile: ./Dockerfile
+    restart: no
+    ports:
+        - 8080:8080
+        - 8182:8181
+        - 4849:4848
+        - 9009:9009
+    environment:
+      DATABASE_USER: birthdayreminderuser
+      DATABASE_PASSWORD: examplepass
+      DATABASE_NAME: birthdayreminder
+      DATABASE_HOST: mysqldbbdreminder
+      DATABASE_PORT: 3306
+      PAYARA_ARGS: --debug
+    volumes:
+      - ./serverlog:/opt/payara/appserver/glassfish/domains/domain1/logs:rw

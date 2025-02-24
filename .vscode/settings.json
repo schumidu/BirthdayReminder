@@ -1,0 +1,15 @@
+{
+    "java.dependency.packagePresentation": "hierarchical",
+    // "java.jdt.ls.java.home": "/home/lukas/.sdkman/candidates/java/21.0.2-open"
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-21",
+            "path": "/home/lukas/.sdkman/candidates/java/21.0.2-open",
+            "default": true
+        }
+        ],
+        "terminal.integrated.env.linux": {
+            "DATABASE_PORT": "3306"
+        },
+        "java.configuration.updateBuildConfiguration": "interactive"
+}

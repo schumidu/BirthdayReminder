@@ -1,0 +1,29 @@
+# services:
+#   db: 
+#     image: mysql:8.3
+#     restart: no
+#     container_name: mysqldbbdreminder
+#     ports:
+#       - 3306:3306
+#     environment:
+#       - TZ=Europe/Berlin
+#       - MYSQL_USER=${MYSQL_USER}
+#       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+#       - MYSQL_DATABASE=${MYSQL_DATABASE}
+#       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+
+
+services:
+  db: 
+    image: mysql:8.3
+    restart: no
+    container_name: mysqldbbdreminder
+    ports:
+      - 3306:3306
+    environment:
+      TZ: Europe/Berlin
+      MYSQL_USER: birthdayreminderuser
+      MYSQL_PASSWORD: examplepass
+      MYSQL_DATABASE: birthdayreminder
+      MYSQL_ROOT_PASSWORD: test12
+
