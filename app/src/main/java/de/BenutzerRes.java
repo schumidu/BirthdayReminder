@@ -3,7 +3,9 @@ package de;
 import java.util.List;
 
 import de.entities.Benutzer;
+import jakarta.annotation.Generated;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.websocket.server.PathParam;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -15,6 +17,9 @@ import jakarta.ws.rs.core.Response;
 @RequestScoped
 public class BenutzerRes {
 
+    @Inject
+    private BenutzerRepo repo;
+
     @GET
     @Path("{benutzerid}")
     public Response getBestimmtenBenutzer(@PathParam("benutzerid") final String benutzerid){
@@ -24,9 +29,7 @@ public class BenutzerRes {
     @GET
     public Response getAlleBenutzer(){
         return Response.ok(
-            List.of(
-                new Benutzer(), 
-                new Benutzer())
+            repo.getAllBenutzer()
         ).build();
     }
 
@@ -38,6 +41,14 @@ public class BenutzerRes {
 
     @POST
     public Response createNeueBenutzer(final Benutzer benutzer){
+        repo.createBenutzer(benutzer);
+        return Response.ok().build();
+    }
+
+    @GET
+    @Path("simple")
+    public Response create(){
+        repo.createBenutzer(new Benutzer("lala", "sdfasdf"));
         return Response.ok().build();
     }
     

@@ -8,9 +8,9 @@ import jakarta.ejb.Startup;
 @Startup
 public class Scheduler {
     
-   @Schedule(hour = "*", minute = "*/1", persistent = false) // Executes every 5 minutes
-    public void scheduledMethod() {
-        System.out.println("Scheduled task executed.");
-    }
+//    @Schedule(hour = "*", minute = "*/1", persistent = false) // Executes every 5 minutes
+//     public void scheduledMethod() {
+//         System.out.println("Scheduled task executed.");
+//     }
 
 }

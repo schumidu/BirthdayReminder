@@ -7,14 +7,19 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
 
 @Entity
+@NamedQuery(name = "getallgp", query = "select gp from GeburtstagsPerson gp")
+@Table(name = "GeburtstagsPerson")
 public class GeburtstagsPerson {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private Long id;
+    private String id;
 
     @Column(length = 50, nullable = false, unique = false)
     private String vorname;
@@ -26,6 +31,7 @@ public class GeburtstagsPerson {
     private LocalDate geburtstag;
 
     @ManyToOne
+    @JoinColumn(name = "benutzer")
     private Benutzer benutzer;
 
     public GeburtstagsPerson(String vorname, String nachname, LocalDate geburtstag) {
@@ -35,6 +41,13 @@ public class GeburtstagsPerson {
     }
 
     public GeburtstagsPerson(){}
+
+    public GeburtstagsPerson(String vorname, String nachname, LocalDate geburtstag, Benutzer benutzer) {
+        this.vorname = vorname;
+        this.nachname = nachname;
+        this.geburtstag = geburtstag;
+        this.benutzer = benutzer;
+    }
 
     public String getVorname() {
         return vorname;
@@ -60,14 +73,6 @@ public class GeburtstagsPerson {
         this.geburtstag = geburtstag;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Benutzer getBenutzer() {
         return benutzer;
     }
@@ -76,6 +81,13 @@ public class GeburtstagsPerson {
         this.benutzer = benutzer;
     }
 
-    
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+  
 
 }

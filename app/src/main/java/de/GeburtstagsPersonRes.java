@@ -1,32 +1,44 @@
 package de;
 
-import jakarta.annotation.security.DeclareRoles;
-import jakarta.annotation.security.RolesAllowed;
+import java.time.LocalDate;
+
+import de.entities.Benutzer;
+import de.entities.BenutzerDao;
+import de.entities.GeburtstagsPerson;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
-import jakarta.security.enterprise.SecurityContext;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;;
+import jakarta.ws.rs.core.Response;;
 
 @Path("geburtstagsperson")
 @RequestScoped
-@DeclareRoles("user")
 public class GeburtstagsPersonRes {
 
     @Inject
-    private SecurityContext securityContext;
+    private GeburtstagsPersonRepo geburtstagsPersonRepo;
 
-    // @GET
-    // public Response getGeburtstagsPerson(){
-    //     return Response.ok(new GeburtstagsPerson()).build();
-    // }
+    @Inject
+    private BenutzerDao benutzerDao;
 
     @GET
-    @RolesAllowed({"user"})
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getCallerAndRole(){
-        return "Hier war ich " + securityContext.getCallerPrincipal().getName();// + " : " + securityContext.isCallerInRole("user");
+    public Response getAllGeburtstagsPersons(){
+        return Response.ok(geburtstagsPersonRepo.getAllGeburtstagsPersons()).build();
+    }
+
+    @POST
+    public Response createNeueGeburtstagsPerson(final GeburtstagsPerson geburtstagsPerson){
+        geburtstagsPersonRepo.createNeuGeburtstagsPerson(geburtstagsPerson);
+        return Response.ok().build();
+    }
+
+    @GET
+    @Path("simple")
+    public Response createSimple(){
+        final Benutzer nutzer = benutzerDao.getAll().getLast();
+        final GeburtstagsPerson geburtstagsPerson = new GeburtstagsPerson("Peter", "Macher", LocalDate.now().minusMonths(3), nutzer);
+        geburtstagsPersonRepo.createNeuGeburtstagsPerson(geburtstagsPerson);
+        return Response.ok().build();
     }
 }

@@ -11,34 +11,34 @@ import jakarta.persistence.PersistenceContext;
 
 @Startup
 @ApplicationScoped
-public class BenutzerDao implements Dao<Benutzer> {
+public class GeburtstagsPersonDao implements Dao<GeburtstagsPerson> {
 
     @PersistenceContext(unitName = "DATABASE_UNIT")
     EntityManager em;
 
     @Override
-    public Optional<Benutzer> get(UUID id) {
-        return Optional.of(em.find(Benutzer.class, id));
+    public Optional<GeburtstagsPerson> get(UUID id) {
+        return Optional.of(em.find(GeburtstagsPerson.class, id));
     }
 
     @Override
-    public List<Benutzer> getAll() {
-        return em.createNamedQuery("getappbenutzer", Benutzer.class).getResultList();
+    public List<GeburtstagsPerson> getAll() {
+        return em.createNamedQuery("getallgp", GeburtstagsPerson.class).getResultList();
     }
 
     @Override
-    public void save(Benutzer t) {
+    public void save(GeburtstagsPerson t) {
         em.persist(t);
     }
 
     @Override
-    public void update(Benutzer t) {
+    public void update(GeburtstagsPerson t) {
         em.merge(t);
     }
 
     @Override
-    public void delete(Benutzer t) {
+    public void delete(GeburtstagsPerson t) {
         em.remove(t);
     }
-    
+
 }
