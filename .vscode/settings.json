@@ -11,5 +11,6 @@
         "terminal.integrated.env.linux": {
             "DATABASE_PORT": "3306"
         },
-        "java.configuration.updateBuildConfiguration": "interactive"
+        "java.configuration.updateBuildConfiguration": "interactive",
+        "dbcode.connections": []
 }

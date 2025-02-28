@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./payara/bin/asadmin stop-domain appdomain
+./payara/bin/asadmin stop-domain birthday-rem-domain

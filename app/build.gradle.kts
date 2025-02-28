@@ -53,3 +53,19 @@ java {
         languageVersion = JavaLanguageVersion.of(21)
     }
 }
+
+
+tasks.named<Test>("test") {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform{
+        excludeTags("IntegrationTest")
+    }
+}
+
+tasks.register<Test>("integrationTest"){
+    description = "Runs integration tests."
+    group = "verification"
+    useJUnitPlatform{
+        includeTags("IntegrationTest")
+    }  
+}
